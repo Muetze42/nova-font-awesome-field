@@ -90,10 +90,7 @@ class FontAwesome extends Field
             $style = str_replace('fa-', '', $parts[0]);
             $icon = !empty($parts[1]) ? str_replace('fa-', '', $parts[1]) : null;
             if ($icon) {
-                $file = config(
-                    'nova-font-awesome-field.icon-file',
-                    base_path('nova-components/FontAwesomeField/storage/icons.json')
-                );
+                $file = config('nova-font-awesome-field.icon-file');
                 $contents = json_decode(file_get_contents($file), true);
                 $currentSVG = (string) data_get($contents, $icon.'.svg.'.$style.'.raw', '');
             } else {

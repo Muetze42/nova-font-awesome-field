@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'icon-file' => base_path('nova-components/FontAwesomeField/storage/icons.json'),
+    'icon-file' => base_path('vendor/norman-huth/nova-font-awesome-field/storage/icons.json'),
 
     /*
     |--------------------------------------------------------------------------
