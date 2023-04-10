@@ -1,0 +1,51 @@
+.font-awesome-field svg {
+    fill: currentColor;
+}
+
+.font-awesome-field-index svg {
+    height: 1rem;
+}
+.font-awesome-field-detail svg {
+    height: 2rem;
+}
+.font-awesome-field-form svg {
+    height: 1.6rem;
+}
+.font-awesome-field-form-modal svg {
+    height: 5rem;
+}
+
+.font-awesome-field-btn {
+    text-align: center;
+}
+.font-awesome-field-btn:hover {
+
+}
+
+.font-awesome-field-btn svg {
+    max-height: 1.5rem;
+    max-width: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gap-1 {
+    gap: 0.25rem;
+}
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.font-awesome-field-form {
+    min-width: 36px;
+    min-height: 36px;
+}
+
+.font-awesome-field-form-modal {
+    min-width: 90px;
+    min-height: 90px;
+}
+
+.max-h-60 {
+    max-height: 15rem;
+}
