@@ -62,10 +62,25 @@
                         :placeholder="field.texts.search"
                     >
                 </div>
+                <div v-if="field.styleSelector && availableStyles.length > 1" class="flex flex-wrap justify-center gap-1">
+                    <button
+                        v-for="style in availableStyles"
+                        v-text="style"
+                        role="button"
+                        class="border rounded px-1 py-0.5 border-gray-100 dark:border-gray-700"
+                        :class="selectedStyles.includes(style) ?
+                            'bg-gray-100 dark:bg-gray-700' :
+                            'hover:bg-gray-100 dark:hover:bg-gray-700'"
+                        @click="changeStyle(style, selectedStyles.includes(style))"
+                        :aria-disabled="loading"
+                        :disabled="loading"
+                    />
+                </div>
                 <div class="overflow-y-auto flex flex-wrap max-h-60 gap-2">
                     <template v-for="(data, index) in icons">
                         <button
                             v-for="(icon, style) in data.svg"
+                            :title="index + ' ' + style"
                             type="button"
                             class="font-awesome-field font-awesome-field-btn h-12 w-12 text-center
                                     border border-gray-100 dark:border-gray-700 rounded p-1
@@ -76,11 +91,14 @@
                             <span class="sr-only">{{ index }} {{ style }}</span>
                         </button>
                     </template>
+                    <div v-if="!Object.keys(icons).length && !loading" class="px-2 py-4 text-center w-full italic font-semibold">
+                        {{ field.texts.null }}
+                    </div>
                     <LoadingCard class="w-full py-5 block text-center w-full" v-if="loading"/>
                     <button
                         v-if="chunk && !loading"
                         type="button"
-                        class="text-center px-2 py-2 whitespace-nowrap dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900
+                        class="text-center px-2 py-2 whitespace-nowrap hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900
                         block text-center w-full"
                         @click="getIcons"
                     >
@@ -119,7 +137,6 @@ import debounce from "lodash/debounce";
 
 export default {
     mixins: [FormField, HandlesValidationErrors],
-
     props: [
         'resourceName',
         'resourceId',
@@ -137,6 +154,8 @@ export default {
             loading: true,
             show: false,
             chunk: 0,
+            availableStyles: null,
+            selectedStyles: [],
         }
     },
     mounted() {
@@ -151,6 +170,19 @@ export default {
         }, 250)
     },
     methods: {
+        changeStyle(style, isActive) {
+            if (isActive && this.selectedStyles.includes(style)) {
+                this.selectedStyles = this.selectedStyles.filter(function (v) {
+                    return v !== style
+                })
+            } else {
+                this.selectedStyles.push(style)
+            }
+            this.loading = true
+            this.icons = {}
+            this.chunk = 0
+            this.getIcons()
+        },
         removeIcon() {
             this.currentSVG = ''
             this.value = ''
@@ -173,12 +205,12 @@ export default {
             Nova.request().post('/nova-vendor/nova-font-awesome-field/icons', {
                 search: this.search,
                 chunk: this.chunk,
+                styles: this.selectedStyles,
             }).then(response => {
-                console.log(this.icons)
                 this.icons = {...this.icons, ...response.data.icons}
                 this.loading = false
-                // console.log(this.icons)
                 this.chunk = response.data.chunk
+                this.availableStyles = response.data.availableStyles
             })
         },
     },
