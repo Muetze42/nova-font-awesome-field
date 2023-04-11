@@ -18,7 +18,7 @@ class FieldServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/nova-font-awesome-field.php' => config_path('nova-font-awesome-field.php'),
-        ]);
+        ], 'config');
 
         $this->app->booted(function () {
             $this->routes();

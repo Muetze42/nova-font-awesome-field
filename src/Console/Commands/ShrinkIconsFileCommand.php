@@ -61,7 +61,6 @@ class ShrinkIconsFileCommand extends Command
                 return Arr::except($item, $excepts);
             });
 
-        file_put_contents($file, json_encode($collection->toArray(),JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-        //file_put_contents($file, json_encode($collection->toArray()));
+        file_put_contents($file, json_encode($collection->toArray()));
     }
 }

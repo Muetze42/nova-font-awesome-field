@@ -19,13 +19,12 @@ return [
     | Font Awesome Default Families
     |--------------------------------------------------------------------------
     |
-    | Here you specify which families are to be available for the field
-    | without further details.
-    | (Unavailable families are not displayed in the field.)
+    | Here you specify which families are to be available for the field.
+    | (Unavailable families are not displayed in the field)
     |
     */
 
-    'default-styles' => [
+    'styles' => [
         'brands',
         'duotone',
         'light',
@@ -46,4 +45,30 @@ return [
     */
 
     'save-raw-svg' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Font Awesome Picker Icons
+    |--------------------------------------------------------------------------
+    |
+    | Determine here how many icons will be displayed on each request
+    | in the Icon picker.
+    | An Integer is required.
+    |
+    */
+
+    'chunk' => 86,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Font Awesome Picker Style Selector
+    |--------------------------------------------------------------------------
+    |
+    | Determine whether the Style Selector should be enabled or disabled
+    | as default.
+    | An Boolean is required.
+    |
+    */
+
+    'style-selector' => true,
 ];
