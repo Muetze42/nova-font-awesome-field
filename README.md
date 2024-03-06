@@ -2,6 +2,8 @@
 
 A [Font Awesome](https://fontawesome.com) icon picker for [Laravel Nova](https://nova.laravel.com/).
 
+Demo: https://nova-demo.huth.it/resources/norman-huth-font-awesome-fields
+
 ![Preview with Style Selector](docs/preview-1.png)
 
 ![Preview without Style Selector](docs/preview-2.png)
